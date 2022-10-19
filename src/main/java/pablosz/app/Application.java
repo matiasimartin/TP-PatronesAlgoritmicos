@@ -47,7 +47,7 @@ public class Application implements CommandLineRunner
 
 		po.store(2, p);
 
-		Persona personaRecuperada = po.load(2, po.getClass());
+		Persona personaRecuperada = po.load(2, p.getClass());
 
 		System.out.println("La persona recuperada es:" + personaRecuperada.getDni() + ", nombre: " + personaRecuperada.getNombre());
 

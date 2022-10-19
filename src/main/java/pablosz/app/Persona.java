@@ -6,10 +6,11 @@ import javax.persistence.Id;
 @Entity
 public class Persona {
 
-
     private String nombre;
     @Id
     private int dni;
+
+    private long sesion;
 
     public String getNombre() {
         return nombre;
@@ -25,5 +26,13 @@ public class Persona {
 
     public void setDni(int dni) {
         this.dni = dni;
+    }
+
+    public long getSesion() {
+        return sesion;
+    }
+
+    public void setSesion(long sesion) {
+        this.sesion = sesion;
     }
 }
