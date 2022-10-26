@@ -30,8 +30,6 @@ public class Application implements CommandLineRunner
 		SpringApplication.run(Application.class,args);
 	}
 	
-	//@Autowired
-	//private EntityManager em;
 
 	@Autowired
 	private PersistentObjects po;
@@ -40,17 +38,6 @@ public class Application implements CommandLineRunner
 	public void run(String... args) throws Exception
 	{
 
-
-		Persona p = new Persona();
-		p.setDni(9);
-		p.setNombre("mati");
-
-		po.store(2, p);
-
-		Persona personaRecuperada = po.load(2, p.getClass());
-
-		System.out.println("La persona recuperada es:" + personaRecuperada.getDni() + ", nombre: " + personaRecuperada.getNombre());
-
-		//LOG.info("Todo funciona correctamente? "+(em!=null));
+		LOG.info("Todo funciona correctamente? "+(po!=null));
 	}
 }

@@ -10,7 +10,11 @@ public class Persona {
     @Id
     private int dni;
 
-    private long sesion;
+    public Persona(String nombre, int dni){
+        super();
+        this.nombre = nombre;
+        this.dni = dni;
+    }
 
     public String getNombre() {
         return nombre;
@@ -28,11 +32,4 @@ public class Persona {
         this.dni = dni;
     }
 
-    public long getSesion() {
-        return sesion;
-    }
-
-    public void setSesion(long sesion) {
-        this.sesion = sesion;
-    }
 }

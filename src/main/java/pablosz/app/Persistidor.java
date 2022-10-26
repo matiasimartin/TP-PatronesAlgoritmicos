@@ -9,18 +9,9 @@ import com.fasterxml.jackson.core.JsonParser;
 @Entity
 public class Persistidor {
     @Id
-    private int id;
     private long sesion;
-    private int objeto;
+    private String clase;
     private String contenido; //json
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public long getSesion() {
         return sesion;
@@ -30,12 +21,12 @@ public class Persistidor {
         this.sesion = sesion;
     }
 
-    public int getObjeto() {
-        return objeto;
+    public String getClase() {
+        return clase;
     }
 
-    public void setObjeto(int objeto) {
-        this.objeto = objeto;
+    public void setClase(String clase) {
+        this.clase = clase;
     }
 
     public String getContenido() {
