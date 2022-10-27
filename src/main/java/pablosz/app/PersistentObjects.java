@@ -17,6 +17,7 @@ public class PersistentObjects implements PersistentObjectsInterface {
     @Autowired
     private EntityManager em;
 
+
     @Override
     @Transactional
     public void createSession(long key, long timeout) {
@@ -34,6 +35,11 @@ public class PersistentObjects implements PersistentObjectsInterface {
     @Transactional
     public void store(long key, Object obj) {
 
+       /* Query sesion = em.createQuery("FROM Sesion WHERE sesion = " +key);
+        Sesion s = (Sesion) sesion.getSingleResult();
+        if(s == null){
+            throw new Exception("ERROR");
+        }*/
 
         Persistidor persistidor = new Persistidor();
         persistidor.setSesion(key);
@@ -41,7 +47,7 @@ public class PersistentObjects implements PersistentObjectsInterface {
 
         Gson gson = new GsonBuilder().addSerializationExclusionStrategy(new AnnotationsCustomGson()).create();
         String json = gson.toJson(obj);
-        System.out.println(json);
+
         persistidor.setContenido(json);
 
         em.persist(persistidor);
@@ -52,6 +58,31 @@ public class PersistentObjects implements PersistentObjectsInterface {
     @Transactional
     public <T> T load(long key, Class<?> clazz) {
 
+       /* Persistidor persistidor;
+        Sesion s;
+
+        Query sesionCreada = em.createQuery("FROM Sesion WHERE sesion = " +key);
+        try {
+            s = (Sesion) sesionCreada.getSingleResult();
+        }catch(Exception e){
+            throw new Exception("No existe sesion");
+        }
+
+        Query sesion = em.createQuery("FROM Persistidor WHERE sesion = " +key);
+        try {
+            persistidor = (Persistidor) sesion.getSingleResult();
+        }catch(Exception e) {
+            System.out.println("ERROR");
+        }
+
+
+        String hql = "FROM Persistidor WHERE sesion = " +key+ " AND clase = " + "\'" + clazz.getName() + "\'";
+        Query q = em.createQuery(hql);
+        try {
+            persistidor = (Persistidor) q.getSingleResult();
+        }catch (Exception e){
+
+        }*/
 
         String hql = "FROM Persistidor WHERE sesion = " +key+ " AND clase = " + "\'" + clazz.getName() + "\'";
         Query q = em.createQuery(hql);

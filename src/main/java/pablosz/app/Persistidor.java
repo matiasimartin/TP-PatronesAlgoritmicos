@@ -2,14 +2,15 @@ package pablosz.app;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-import com.fasterxml.jackson.core.JsonParser;
+import javax.persistence.IdClass;
 
 
 @Entity
+@IdClass(PersistidorId.class)
 public class Persistidor {
     @Id
     private long sesion;
+    @Id
     private String clase;
     private String contenido; //json
 

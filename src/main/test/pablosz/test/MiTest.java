@@ -28,6 +28,8 @@ public class MiTest
 	Persona persona;
 	Persona persona2;
 	Domicilio domicilio;
+
+	String mati = "MATIAS";
 	@BeforeEach
 	public void crearObjectos() {
 		persona = new Persona("Matias", 215487);
@@ -64,10 +66,14 @@ public class MiTest
 		po.createSession(2, 300);
 
 		po.store(2, persona);
+		po.store(2, domicilio);
 
 		Persona personaRecuperada = po.load(2, persona.getClass());
-
+		Domicilio domicilioRecuperado = po.load(2, domicilio.getClass());
+		//String recuperado = po.load(2, mati.getClass());
+		//assertEquals(mati, recuperado);
 		assertThat(persona).isEqualToComparingFieldByField(personaRecuperada);
+		assertThat(domicilio).isEqualToComparingFieldByField(domicilioRecuperado);
 
 
 	}
