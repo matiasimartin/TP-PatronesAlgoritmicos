@@ -33,13 +33,14 @@ public class PersistentObjects implements PersistentObjectsInterface {
 
     @Override
     @Transactional
-    public void store(long key, Object obj) {
+    public void store(long key, Object obj) throws Exception {
 
-       /* Query sesion = em.createQuery("FROM Sesion WHERE sesion = " +key);
-        Sesion s = (Sesion) sesion.getSingleResult();
-        if(s == null){
-            throw new Exception("ERROR");
-        }*/
+       Query sesion = em.createQuery("FROM Sesion WHERE key = " +key);
+       try {
+           Sesion s = (Sesion) sesion.getSingleResult();
+       }catch(Exception e){
+           throw new Exception("No existe la sesion");
+      }
 
         Persistidor persistidor = new Persistidor();
         persistidor.setSesion(key);
@@ -56,37 +57,17 @@ public class PersistentObjects implements PersistentObjectsInterface {
 
     @Override
     @Transactional
-    public <T> T load(long key, Class<?> clazz) {
+    public <T> T load(long key, Class<?> clazz) throws Exception {
 
-       /* Persistidor persistidor;
-        Sesion s;
-
-        Query sesionCreada = em.createQuery("FROM Sesion WHERE sesion = " +key);
-        try {
-            s = (Sesion) sesionCreada.getSingleResult();
-        }catch(Exception e){
-            throw new Exception("No existe sesion");
-        }
-
-        Query sesion = em.createQuery("FROM Persistidor WHERE sesion = " +key);
-        try {
-            persistidor = (Persistidor) sesion.getSingleResult();
-        }catch(Exception e) {
-            System.out.println("ERROR");
-        }
-
+        Persistidor persistidor;
 
         String hql = "FROM Persistidor WHERE sesion = " +key+ " AND clase = " + "\'" + clazz.getName() + "\'";
         Query q = em.createQuery(hql);
         try {
             persistidor = (Persistidor) q.getSingleResult();
-        }catch (Exception e){
-
-        }*/
-
-        String hql = "FROM Persistidor WHERE sesion = " +key+ " AND clase = " + "\'" + clazz.getName() + "\'";
-        Query q = em.createQuery(hql);
-        Persistidor persistidor = (Persistidor) q.getSingleResult();
+        }catch(Exception e) {
+            return null;
+        }
 
         Gson gson = new Gson();
 

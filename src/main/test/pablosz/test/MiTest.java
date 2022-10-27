@@ -60,7 +60,7 @@ public class MiTest
 	}
 	@Test
 	@Transactional
-	public void SesionStoreLoadPersona()
+	public void SesionStoreLoadPersona() throws Exception
 
 	{
 		po.createSession(2, 300);
@@ -80,7 +80,7 @@ public class MiTest
 
 	@Test
 	@Transactional
-	public void PersonaEnDosSesiones()
+	public void PersonaEnDosSesiones() throws Exception
 
 	{
 		po.createSession(2, 300);
@@ -100,7 +100,7 @@ public class MiTest
 
 	@Test
 	@Transactional
-	public void SesionStoreLoadDomicilioNotPersistable()
+	public void SesionStoreLoadDomicilioNotPersistable() throws Exception
 
 	{
 		po.createSession(3, 200);

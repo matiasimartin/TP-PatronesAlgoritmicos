@@ -34,8 +34,7 @@ public class PersistentObjectTest
 	Persona persona;
 	Persona persona2;
 	Domicilio domicilio;
-
-	String mati = "MATIAS";
+	
 	@BeforeEach
 	public void crearObjectos() {
 		persona = new Persona("Matias", 215487);
@@ -45,14 +44,14 @@ public class PersistentObjectTest
 
 	@BeforeEach
 	@Transactional
-	public void before()
+	public void before() throws Exception
 	{
 		// persisto sobre la sesion 1
 		po.createSession(key1,100000);
 		po.store(key1,"PABLO");
 		po.store(key1,Integer.valueOf(1));
 
-		// persisto sobre la sesion 1
+		// persisto sobre la sesion 2
 		po.createSession(key2,200000);
 		po.store(key2,"PEDRO");
 		po.store(key2,Integer.valueOf(2));
@@ -69,7 +68,7 @@ public class PersistentObjectTest
 		
 	@Test
 	@Transactional
-	public void testErrores()
+	public void testErrores() throws Exception
 	{
 		// load de un objeto que no fue persistido o fue borrado => null
 		assertNull(po.load(key1,Double.class));
@@ -86,7 +85,7 @@ public class PersistentObjectTest
 	
 	@Test
 	@Transactional
-	public void testFuncionalidad()
+	public void testFuncionalidad() throws Exception
 	{
 		assertEquals(po.load(key1,String.class),stringKey1);
 		//assertEquals(po.load(key1,Integer.class),intKey1);
@@ -96,7 +95,7 @@ public class PersistentObjectTest
 	
 	@Test
 	@Transactional
-	public void testPersistableNotPersistable()
+	public void testPersistableNotPersistable() throws Exception
 	{
 		// store
 		MiClase1 mc1 = new MiClase1(1,2,3);
@@ -126,7 +125,7 @@ public class PersistentObjectTest
 	
 	@Test
 	@Transactional
-	public void testRemove()
+	public void testRemove() throws Exception
 	{
 		// verifico que existe el objeto
 		String s = (String)po.load(key1,String.class);
@@ -140,7 +139,7 @@ public class PersistentObjectTest
 	
 	@Test
 	@Transactional
-	public void testDestroy()
+	public void testDestroy() throws Exception
 	{
 		// la sesion existe
 		String s = (String)po.load(key1,String.class);
@@ -148,7 +147,7 @@ public class PersistentObjectTest
 		
 		// la destruyo
 		po.destroySession(key1);
-		asegurarTiraExcepcion(()->po.loadSession(key1,String.class));
+		asegurarTiraExcepcion(()->po.load(key1,String.class));
 	}
 	
 	
